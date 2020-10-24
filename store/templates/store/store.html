@@ -1,0 +1,43 @@
+{% extends "store/main.html" %}
+{% load static  %}
+{% block content %}
+
+<h3>Store</h3>
+
+{% if messages %}
+	{% for message in messages %}
+		<div class="alert alert-warning alert-dismissible" role="alert">
+			<button class="close" data-dismiss="alert" >
+				<small><sup>x</sup> </small>
+			</button>
+			{{message}}
+		</div> <br>
+	{% endfor %}
+{% endif %}
+
+<div class="row">
+
+	{% for product in products %}
+	<div class="col-lg-4">
+			{% if product.image_URL_check != "" %}
+				<img class="thumbnail" src="{{product.image_URL_check}}">
+			{% else %}
+				<img class="thumbnail" src="/media/products/placeholder.png">
+			{% endif %}
+			<div class="box-element product">
+				<h6><strong> {{ product.name }} </strong></h6>
+				<hr>
+
+				<button data-product={{product.id}} data-action="add"
+				class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+				<a class="btn btn-outline-success" href="{{product.image_URL_check}}">View</a>
+				<h4 style="display: inline-block; float: right"><strong>৳ {{product.price}}</strong></h4>
+
+			</div>
+		</div>
+	{% endfor %}
+
+</div>
+
+
+{% endblock %}
