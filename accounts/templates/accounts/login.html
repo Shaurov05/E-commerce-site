@@ -1,0 +1,51 @@
+{% extends 'accounts/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+{#  #}
+<div class="" style="padding: 20px 20px 20px 20px; background-color:#e6e1e1; width:500px; margin:0 auto;" >
+
+  <h2>Login</h2><br>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible" role="alert">
+        <button class="close" data-dismiss="alert" >
+          <small><sup>x</sup> </small>
+        </button>
+        {{message}}
+      </div> <br>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    {# {{ form.as_p }} #}
+    <br>
+    <button class="btn btn-primary" type="submit">Login</button>
+  </form>
+  <br>
+  <a style="color:red;" href="{% url 'password_reset' %}">Forgot Password</a>
+
+  <br><br>
+  <h6>If you don't have an account, please <a href="{% url 'signup' %}">Signup</a> </h6>
+
+
+  <p><strong>-- OR --</strong></p>
+  <h2>Social Login!</h2>
+  <h6>Login with Github/ twitter/ facebook</h6>
+  <br>
+
+  {% load socialaccount %}
+  <a href="{% provider_login_url 'google' %}?next={{ request.path }}">Login with Google</a> <br>
+  <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a> <br/>
+  <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a> <br/>
+  <a href="{% url 'social:begin' 'github' %}">Login with Github</a> <br/>
+
+
+</div>
+{% endblock %}

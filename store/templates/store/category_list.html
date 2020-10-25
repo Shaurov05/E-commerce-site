@@ -1,0 +1,18 @@
+{% extends 'store/main.html' %}
+
+{% block content %}
+
+<div class="container jumbotron">
+
+  <h2>Categories of product:</h2>
+  <ul>
+    {% for category in category_list %}
+      <a href="{% url 'category_detail' pk=category.pk %}">
+        <li>{{category.name}}</li>
+      </a> 
+    {% endfor %}
+  </ul>
+
+</div>
+
+{% endblock %}
