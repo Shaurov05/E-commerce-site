@@ -13,5 +13,7 @@ run:
 
 `pip install Pillow`
 
+'pip install django-crispy-forms'
+
 After installing packages run your server
 
